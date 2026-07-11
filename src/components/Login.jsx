@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "./Button";
 import { authService } from "../services/api";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState();
+
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -12,6 +17,8 @@ export default function Login() {
 
     try {
       const response = await authService.login(loginDto);
+      login();
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       setLoginError(error.response?.data);
     }
@@ -34,7 +41,9 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+
       {loginError != undefined && <h3>{"Error: " + loginError}</h3>}
+
       <Button type="submit">Login</Button>
     </form>
   );

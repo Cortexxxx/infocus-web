@@ -32,5 +32,9 @@ export const authService = {
     logout: async () => {
         const response = await api.post("/auth/logout");
         return response.data;
+    },
+    getStatus: async () => {
+        const response = await api.get("/auth/status");
+        return response.data;
     }
 }

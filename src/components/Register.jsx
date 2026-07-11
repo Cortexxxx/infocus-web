@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "./Button";
 import { authService } from "../services/api";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
 
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -18,7 +22,10 @@ export default function Register() {
     const registerDto = { email, password };
 
     try {
-      const response = await authService.register(registerDto);
+      await authService.register(registerDto);
+      await authService.login(registerDto);
+      login();
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       alert("Ошибка " + error.response?.status); // Заглушка
     }
