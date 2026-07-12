@@ -1,6 +1,6 @@
 /* Прописываем системные шрифты Apple и глобальные переменные */
 :root {
-  --bg-global: #0b0c10;          /* Очень глубокий, благородный темный фон */
+  --bg-global: #0b0c10;           /* Очень глубокий, благородный темный фон */
   --bg-card: rgba(22, 24, 30, 0.7); /* Полупрозрачный фон для карточек/панелей */
   --accent: #ffffff;             /* Чистый белый для главных акцентов и текста */
   --text-secondary: #86868b;     /* Фирменный серый цвет Apple для второстепенного текста */
@@ -11,30 +11,32 @@
   color-scheme: dark;
 }
 
-/* Сброс базовых отступов и плавный скролл */
+/* Сброс базовых отступов и сжатий */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Заставляем приложение занимать ровно 100% экрана без лишних прокруток */
+html, 
+body, 
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Общий скролл страницы запрещен, скроллиться будет только блок задач */
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--bg-global);
   color: var(--accent);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 60px;
   -webkit-font-smoothing: antialiased;
+  display: block; /* Убираем старый flex, чтобы не ломать дочерний дашборд */
 }
 
-/* Главный контейнер приложения (App) */
-#root {
-  width: 100%;
-  max-width: 650px; /* Компактная, аккуратная колонка по центру экрана */
-  padding: 0 20px;
-}
 
 /* Заголовки */
 h1, h2, h3 {

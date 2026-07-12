@@ -1,0 +1,251 @@
+.dashboardLayout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  background-color: #090a0f;
+  color: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ЛЕВАЯ КОЛОНКА: Папки */
+.sidebarLeft {
+  width: 260px;
+  min-width: 260px;
+  background-color: #12141c;
+  border-right: 1px solid #1e2230;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Расталкивает контент (папки) и профиль по краям */
+  height: 100%; /* Обязательно, чтобы панель была на всю высоту */
+}
+.sidebarTopContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebarLeft h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebarLeftPlaceholder {
+  color: #6b7280;
+  font-size: 14px;
+}
+/* БЛОК ПРОФИЛЯ */
+.userProfileBlock {
+  margin-top: auto; /* Жестко толкает блок в самый низ */
+  padding-top: 16px;
+  border-top: 1px solid #1e2230; /* Тонкая линия-разделитель */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden; /* Чтобы длинное имя не ломало верстку */
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #1e2230; /* Фолбек-фон, если авы нет */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  color: #86868b; /* Фирменный серый */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: rgba(239, 68, 68, 0.1); /* Мягкий красный фон при наведении */
+  color: #ef4444; /* Красная иконка */
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 15px 15px 0px 15px;
+  overflow-y: auto;   
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  transition: flex-grow 0.3s ease-in-out; 
+  
+  height: 100%; 
+}
+
+.welcomeCard {
+  width: 100%;
+  background-color: #12141c;
+  border: 1px solid #1e2230;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+}
+
+.welcomeCard h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+.todoContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  
+  /* МАГИЯ ТУТ: растягивается вниз до упора, но не вылезает за край */
+  flex-grow: 1; 
+  
+  /* Карточки внутри контейнера не будут насильно растягиваться по высоте, 
+     если ты добавишь это свойство: */
+  justify-content: flex-start; 
+}
+
+/* ПРАВАЯ КОЛОНКА: Детали задачи */
+.sidebarRight {
+  width: 400px;
+  min-width: 400px;
+  background-color: #12141c;
+  border-left: 1px solid #1e2230;
+  padding: 24px;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(0);
+}
+
+.sidebarRight.hidden {
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  border-left: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(100%);
+}
+
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebarMeta {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.sidebarTitle {
+  font-size: 22px;
+  margin: 0 0 16px 0;
+  color: #fff;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word; 
+  font-weight: 600;
+}
+
+.sidebarDescription {
+  color: #a0a5b5;
+  line-height: 1.6;
+  font-size: 15px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.sidebarFooter {
+  margin-top: 40px;
+  border-top: 1px solid #1e2230;
+  padding-top: 20px;
+  color: #6b7280;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.logoWrapper {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+}
+
+/* Адаптив под мобилки */
+@media (max-width: 768px) {
+  .sidebarLeft {
+    display: none;
+  }
+  .mainContent {
+    padding: 20px 16px;
+  }
+  .sidebarRight {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 100vh;
+    z-index: 999;
+    border-left: none;
+    transform: translateX(0);
+  }
+  .sidebarRight.hidden {
+    transform: translateX(100%);
+    width: 100% !important;
+    min-width: 100% !important;
+    padding: 0;
+    opacity: 1;
+  }
+}

@@ -1,43 +1,33 @@
-import { useState } from "react";
 import Button from "../Button";
-import styles from "./Task.module.css"; // Импортируем стили
-import { Trash2, Pencil, ChevronDown, ChevronUp } from "lucide-react";
-export default function Task({ children, data }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+import styles from "./Task.module.css";
+import { Trash2, Pencil, ChevronRight } from "lucide-react";
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
+export default function Task({ data, onSelect, isActive }) {
   return (
-    <div className={styles.task} onClick={toggleExpand}>
+    /* Если таска выбрана, можем подкинуть ей класс активности для подсветки */
+    <div
+      className={`${styles.task} ${isActive ? styles.activeTask : ""}`}
+      onClick={onSelect}
+    >
       <div className={styles.header}>
-        <h2 className={styles.title}>{children}</h2>
+        <h2 className={styles.title}>{data.title}</h2>
 
         <div
           className={styles.buttonGroup}
           onClick={(e) => e.stopPropagation()}
         >
           <Button>
-            <Pencil size={16}></Pencil>
+            <Pencil size={16} />
           </Button>
           <Button variant="danger">
-            <Trash2 size={16}></Trash2>
+            <Trash2 size={16} />
           </Button>
         </div>
+
         <div className={styles.chevron}>
-          {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          <ChevronRight size={18} />
         </div>
       </div>
-
-      {isExpanded && data.description && (
-        <div
-          className={styles.description}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <p>{data.description}</p>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Authentication from "./components/Authentication/Authentication";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import { todoService } from "./services/api";
 import { authService } from "./services/api";
