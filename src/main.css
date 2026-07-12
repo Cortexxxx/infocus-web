@@ -103,6 +103,15 @@ li:last-child {
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
+.btn-danger {
+  background-color: #e74c3c !important; /* или твой оттенок красного */
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b !important;
+}
+
 /* Стилизация полей ввода (если будешь делать формы) */
 input[type="text"], input[type="password"], input[type="email"] {
   width: 100%;
