@@ -1,0 +1,17 @@
+/* Верхняя строка: инпут названия + кнопка */
+.inputRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Делаем инпут плоским, убирая его собственную агрессивную рамку */
+.mainInput {
+  flex-grow: 1;
+  background: transparent; /* Убираем плашку инпута, фон теперь единый */
+  border: none;
+  padding: 8px 4px;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}

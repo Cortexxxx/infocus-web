@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Authentication from "./components/Authentication/Authentication";
-import Dashboard from "./components/Dashboard/Dashboard";
 import { AuthProvider } from "./context/AuthContext";
 import { todoService } from "./services/api";
 import { authService } from "./services/api";
+
 import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import Authentication from "./components/Authentication/Authentication";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   return (

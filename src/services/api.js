@@ -7,14 +7,13 @@ const api = axios.create({
 
 
 
-// Объект с методами для конкретных сущностей (как репозиторий в C#)
 export const todoService = {
   getAll: async () => {
     const response = await api.get('/todos');
     return response.data;
   },
-  create: async (title) => {
-    const response = await api.post('/todos', { title });
+  create: async (todoDto) => {
+    const response = await api.post('/todos', todoDto );
     return response.data;
   },
   delete: async (id) => {

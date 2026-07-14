@@ -1,0 +1,42 @@
+
+/* ЛЕВАЯ КОЛОНКА: Папки */
+.sidebarLeft {
+  width: 260px;
+  min-width: 260px;
+  background-color: #12141c;
+  border-right: 1px solid #1e2230;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Расталкивает контент (папки) и профиль по краям */
+  height: 100%; /* Обязательно, чтобы панель была на всю высоту */
+}
+.sidebarTopContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebarLeft h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sidebarLeftPlaceholder {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.logoWrapper {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .sidebarLeft {
+    display: none;
+  }
+}

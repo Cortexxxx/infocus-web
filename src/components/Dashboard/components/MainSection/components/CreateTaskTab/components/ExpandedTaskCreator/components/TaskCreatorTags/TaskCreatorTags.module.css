@@ -1,0 +1,39 @@
+
+.tagsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* Базовые чипсы тегов */
+.tagChip {
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #a0a5b5;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tagChip:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Активный тег красится в свой кастомный цвет */
+.tagChipActive {
+  background-color: var(--tag-color) !important;
+  border-color: var(--tag-color) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+

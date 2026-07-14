@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import Button from "./Button";
-import { authService } from "../services/api";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+
+import Button from "@/components/UI/Button/Button";
+import { authService } from "@/services/api.js";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function Register() {
   const [email, setEmail] = useState("");

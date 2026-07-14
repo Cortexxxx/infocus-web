@@ -1,0 +1,60 @@
+/* База для всех кнопок */
+.btnBase {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: none;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.btnBase:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 1. Primary (Синяя) */
+.btnPrimary {
+  background-color: #2f80ed;
+}
+.btnPrimary:hover:not(:disabled) {
+  background-color: #1b6fd1;
+}
+
+/* 2. Secondary (Контурная) */
+.btnSecondary {
+  border-color: #2d3142;
+}
+.btnSecondary:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #86868b;
+}
+
+/* 3. Text (Без фона — идеальна для "Отмена") */
+.btnText {
+  color: #86868b;
+}
+.btnText:hover:not(:disabled) {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 4. Danger (Красная для удаления) */
+.btnDanger {
+  background-color: #ef4444;
+}
+.btnDanger:hover:not(:disabled) {
+  background-color: #dc2626;
+}
+
+/* Состояние активности (если нужно подсветить) */
+.active {
+  border-color: #fff;
+}

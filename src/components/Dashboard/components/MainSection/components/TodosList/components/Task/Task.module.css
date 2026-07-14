@@ -1,0 +1,147 @@
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px; /* Сделали вертикальный паддинг чуть меньше, так как строк теперь две */
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task:hover {
+  background-color: rgba(255, 255, 255, 0.02); 
+}
+
+.task.activeTask {
+  background-color: rgba(47, 128, 237, 0.08); 
+}
+
+/* Компоновка левой части */
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 500;
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis;  
+}
+
+/* Вторая строчка метаданных */
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deadlineBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #86868b; /* Приглушенный серый */
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Цветные индикаторы приоритета */
+.priorityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.priorityHigh {
+  background-color: #ef4444; /* Мягкий красный */
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+}
+
+.priorityMedium {
+  background-color: #f59e0b; /* Спокойный оранжевый */
+}
+
+.priorityLow {
+  background-color: #4b5563; /* Серый */
+}
+
+/* Компоновка правой части */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transform: translateX(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.task:hover .buttonGroup {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.chevron {
+  color: #4b5563; 
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+}
+
+.task:hover .chevron {
+  color: #86868b;
+}
+
+/* Кнопки действий */
+.actionIconBtn {
+  background: none !important;
+  border: none !important;
+  color: #86868b !important; 
+  padding: 6px !important;
+  border-radius: 6px !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+}
+
+.actionIconBtn:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
+}
+
+.actionIconBtn.delete:hover {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+}

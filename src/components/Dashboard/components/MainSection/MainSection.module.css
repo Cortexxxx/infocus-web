@@ -1,0 +1,41 @@
+/* ==========================================
+   ОСНОВНОЙ КОНТЕЙНЕР И СТРУКТУРА СТРАНИЦЫ
+   ========================================== */
+
+.mainContent {
+  flex-grow: 1;
+  padding: 0 32px 32px 32px; /* Убираем верхний паддинг, его заберет хедер */
+  overflow-y: auto;   
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-sizing: border-box;
+  height: 100%; 
+  background-color: transparent;
+}
+
+.todoContainer {
+  width: 100%; /* Занимает всё свободное пространство */
+  background-color: #12141c; 
+  border: 1px solid #1e2230;   
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; 
+}
+
+
+/* ==========================================
+   АДАПТИВНЫЙ ДИЗАЙН (МОБИЛКИ)
+   ========================================== */
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 16px;
+  }
+  .datesRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,56 @@
+
+/* ==========================================
+   УПРАВЛЕНИЕ ФОРМОЙ И ЕЕ РАСШИРЕНИЕМ
+   ========================================== */
+
+/* Панель с описанием и датами */
+.expandedPanel {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Выделяем достаточно высоты под текстареа, 2 даты и теги */
+.expandedPanel.show {
+  max-height: 380px;
+  opacity: 1;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04); /* Тонкий внутренний разделитель */
+}
+
+/* Текстареа описания в плоском стиле */
+.descriptionTextarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid #1e2230;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #a0a5b5;
+  font-size: 14px;
+  resize: none;
+  min-height: 60px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 4px;
+}
+
+.descriptionTextarea:focus {
+  border-color: #2f80ed;
+}
+
+/* ==========================================
+   ЭЛЕГАНТНЫЕ ПАРАМЕТРЫ ЗАДАЧИ (ТЕМНАЯ ТЕМА)
+   ========================================== */
+
+/* Контейнер параметров */
+.taskParameters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 0;
+  /* Тонкая полупрозрачная линия вместо жесткой белой */
+  border-top: 1px solid rgba(255, 255, 255, 0.06); 
+  margin-top: 8px;
+}

@@ -1,0 +1,16 @@
+
+/* Зона новой задачи (верхняя секция общего контейнера) */
+.newTodoCard {
+  width: 100%;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.01); /* Тончайшее выделение зоны ввода */
+  border-bottom: 1px solid #1e2230; /* Отделяем форму от списка задач */
+  box-sizing: border-box;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Слегка подсвечиваем зону ввода, если форма раскрыта */
+.newTodoCard.active {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
