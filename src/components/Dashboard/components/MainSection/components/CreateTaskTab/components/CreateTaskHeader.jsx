@@ -1,10 +1,14 @@
-import styles from "./CreateTaskHeader.module.css";
+import styles from "../CreateTaskTab.module.css";
 
 export default function CreateTaskHeader({
   taskForm,
   setTaskForm,
   setIsExpanded,
 }) {
+  const handleTitleChange = (e) => {
+    setTaskForm((prev) => ({ ...prev, title: e.target.value }));
+  };
+
   return (
     <div className={styles.inputRow}>
       <input
@@ -12,9 +16,7 @@ export default function CreateTaskHeader({
         placeholder="Enter task name"
         className={styles.mainInput}
         value={taskForm.title}
-        onChange={(e) =>
-          setTaskForm((prev) => ({ ...prev, title: e.target.value }))
-        }
+        onChange={handleTitleChange}
         onFocus={() => setIsExpanded(true)}
       />
     </div>

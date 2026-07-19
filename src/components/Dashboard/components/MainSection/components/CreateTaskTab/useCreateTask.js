@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { todoService } from "@/services/api.js";
+import { useTodos } from "@/context/TodoContext"; // Импортируем наш контекст
 
 const EMPTY_FORM = {
   title: "",
@@ -9,9 +10,10 @@ const EMPTY_FORM = {
   tags: [],
 };
 
-export function useCreateTask(setTodos) {
+export function useCreateTask() {
   const [taskForm, setTaskForm] = useState(EMPTY_FORM);
   const [isExpanded, setIsExpanded] = useState(false);
+  const { setTodos } = useTodos(); // Вытаскиваем setTodos из контекста
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -27,7 +29,8 @@ export function useCreateTask(setTodos) {
       };
 
       const response = await todoService.create(todoDto);
-      if (setTodos) setTodos((prevTodos) => [...prevTodos, response]);
+      
+      setTodos((prevTodos) => [...prevTodos, response]);
 
       resetForm();
     } catch (error) {

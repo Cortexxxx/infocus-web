@@ -1,47 +1,113 @@
+import { useState, useEffect } from "react";
+import { useTodos } from "@/context/TodoContext";
+import { Info } from "lucide-react";
+import { todoService } from "@/services/api";
 import styles from "./Details.module.css";
 
-import { X, Info } from "lucide-react";
-import Button from "@/components/UI/Button/Button";
+import DetailsHeader from "./DetailsHeader";
+import DetailsView from "./DetailsView";
+import DetailsEdit from "./DetailsEdit";
+import DetailsFooter from "./DetailsFooter";
 
-export default function Details({ selectedTodo, setSelectedTodo }) {
-  return (
-    <aside
-      className={`${styles.sidebarRight} ${!selectedTodo ? styles.hidden : ""}`}
-    >
-      {selectedTodo ? (
-        <div className={styles.contentWrapper}>
-          <div className={styles.sidebarHeader}>
-            <span className={styles.sidebarMeta}>Information</span>
+export default function Details() {
+  const { setTodos, selectedTodo, setSelectedTodo } = useTodos();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState({
+    title: "",
+    description: "",
+    priority: "medium",
+    deadline: "",
+    scheduledDate: "",
+  });
 
-            <Button
-              variant="text"
-              onClick={() => setSelectedTodo(null)}
-              className={styles.closeButton}
-            >
-              <X size={18} />
-            </Button>
-          </div>
+  // Хелпер для нормализации дат при переключении тасок
+  const parseDate = (dateStr) => (dateStr ? dateStr.split("T")[0] : "");
 
-          <h2 className={styles.sidebarTitle}>{selectedTodo.title}</h2>
+  const resetFormValues = (todo) => ({
+    title: todo.title || "",
+    description: todo.description || "",
+    priority: todo.priority || "medium",
+    deadline: parseDate(todo.deadline),
+    scheduledDate: parseDate(todo.scheduledDate),
+  });
 
-          <p className={styles.sidebarDescription}>
-            {selectedTodo.description || "Description is empty"}
-          </p>
+  useEffect(() => {
+    if (selectedTodo) {
+      setEditForm(resetFormValues(selectedTodo));
+      setIsEditing(false);
+    }
+  }, [selectedTodo]);
 
-          <div className={styles.sidebarFooter}>
-            <p>
-              📅 Создано:{" "}
-              {new Date(selectedTodo.createdAt).toLocaleDateString()}
-            </p>
-            <p>Статус: {selectedTodo.isDone ? "Completed" : "In process"}</p>
-          </div>
-        </div>
-      ) : (
-        /* Красивый пустой стейт для десктопа, чтобы колонка не пустовала */
+  if (!selectedTodo) {
+    return (
+      <aside className={`${styles.sidebarRight} ${styles.hidden}`}>
         <div className={styles.emptyState}>
           <Info size={32} />
           <p>Выберите задачу, чтобы увидеть детали</p>
         </div>
+      </aside>
+    );
+  }
+
+  const handleInputChange = (field, value) => {
+    setEditForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCancel = () => {
+    setEditForm(resetFormValues(selectedTodo));
+    setIsEditing(false);
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedTodo = await todoService.update(selectedTodo.id, editForm);
+      setSelectedTodo(updatedTodo);
+      setTodos((prevTodos) =>
+        prevTodos.map((t) =>
+          t.id === selectedTodo.id ? { ...t, ...updatedTodo } : t,
+        ),
+      );
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Возникла ошибка при сохранении задачи:", error.message);
+    }
+  };
+
+  // Выносим общий футер и общий хедер для сборки структуры
+  const sharedFooter = (
+    <DetailsFooter
+      createdAt={selectedTodo.createdAt}
+      isDone={selectedTodo.isDone}
+    />
+  );
+
+  const sharedHeader = (
+    <DetailsHeader
+      isEditing={isEditing}
+      onEditStart={() => setIsEditing(true)}
+      onCancel={handleCancel}
+      onClose={() => setSelectedTodo(null)}
+      isValid={!!editForm.title.trim()}
+    />
+  );
+
+  return (
+    <aside className={styles.sidebarRight}>
+      {isEditing ? (
+        <DetailsEdit
+          formState={editForm}
+          onChange={handleInputChange}
+          onSubmit={handleSave}
+          header={sharedHeader}
+        >
+          {sharedFooter}
+        </DetailsEdit>
+      ) : (
+        <>
+          {sharedHeader}
+          <DetailsView todo={selectedTodo}>{sharedFooter}</DetailsView>
+        </>
       )}
     </aside>
   );

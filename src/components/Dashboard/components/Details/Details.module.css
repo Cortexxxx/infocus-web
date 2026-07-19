@@ -1,15 +1,16 @@
-/* ПРАВАЯ КОЛОНКА: Детали задачи */
 .sidebarRight {
   width: 380px;
-  min-width: 380px;
-  background-color: #12141c;
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 24px;
-  box-sizing: border-box;
+  background-color: var(--bg-sidebar, #1e1e24);
+  border-left: 1px solid var(--border-color, #2a2a32);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  transition: transform 0.2s ease-in-out, width 0.2s ease;
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .contentWrapper {
@@ -18,112 +19,275 @@
   height: 100%;
 }
 
+/* Шапка */
 .sidebarHeader {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color, #2a2a32);
 }
 
 .sidebarMeta {
-  color: #6b7280;
-  font-size: 11px;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 1px;
+  color: var(--text-muted, #8e8e93);
+  font-weight: 600;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editActionsGroup {
+  display: flex;
+  gap: 6px;
+}
+
+/* Базовая кнопка-иконка */
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px; /* Защита самой кнопки */
+  min-height: 32px;
+  flex-shrink: 0;   /* ГОВОРИМ ФЛЕКСУ: НЕ СЖИМАТЬ КНОПКУ! */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: var(--text-secondary) !important;
+}
+
+/* Стили для SVG внутри кнопки */
+.actionButton svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0; /* ГОВОРИМ ФЛЕКСУ: НЕ СЖИМАТЬ ИКОНКУ ВНУТРИ! */
+  stroke: currentColor;
+}
+
+/* Ховер состояния */
+.actionButton:hover {
+  background-color: var(--bg-hover, #2a2a32);
+  color: var(--text-main, #ffffff);
+}
+
+/* Специфичные ховеры для кнопок отмены и сохранения */
+.cancelBtn:hover {
+  color: #ff453a;
+}
+
+.saveBtn:hover {
+  color: #30d158;
 }
 
 .closeButton {
-  background: none !important;
-  border: none !important;
-  color: #6b7280 !important;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px !important;
-  border-radius: 6px !important;
-  transition: background-color 0.15s ease, color 0.15s ease !important;
+  color: var(--text-muted, #8e8e93);
 }
 
 .closeButton:hover {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  color: #fff !important;
+  color: var(--text-main, #ffffff);
 }
 
-.sidebarTitle {
-  font-size: 20px;
-  margin: 0 0 16px 0;
-  color: #fff;
-  font-weight: 600;
-  line-height: 1.4;
-  word-wrap: break-word;
-  word-break: break-word; 
+/* Скролл-контент */
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.sidebarDescription {
-  color: #a0a5b5;
-  line-height: 1.6;
-  font-size: 14px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-word;
-  margin: 0;
-}
-
-.sidebarFooter {
-  margin-top: auto; /* Прижимаем футер к самому низу */
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 20px;
-  color: #6b7280;
-  font-size: 13px;
+/* Стили полей ввода */
+.fieldGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Пустой стейт на десктопе */
+.fieldLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted, #8e8e93);
+  font-weight: 600;
+}
+
+/* Кастомные инпуты формы */
+.editTitleInput {
+  width: 100%;
+  background: var(--bg-input, #121216);
+  border: 1px solid var(--border-color, #2a2a32);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--text-main, #ffffff);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.editTitleInput:focus {
+  border-color: var(--accent-color, #007aff);
+}
+
+.sidebarTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main, #ffffff);
+  line-height: 1.3;
+  margin: 0;
+  word-break: break-word;
+}
+
+.editTextarea {
+  width: 100%;
+  min-height: 120px;
+  background: var(--bg-input, #121216);
+  border: 1px solid var(--border-color, #2a2a32);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: var(--text-main, #ffffff);
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+}
+
+.editTextarea:focus {
+  border-color: var(--accent-color, #007aff);
+}
+
+.sidebarDescription {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary, #ebebf599);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Сетка параметров (дедлайн и приоритет) */
+.parametersGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-color, #2a2a32);
+  border-bottom: 1px solid var(--border-color, #2a2a32);
+}
+
+.parameterItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.parameterLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted, #8e8e93);
+}
+
+.editSelect, .editDateInput {
+  background: var(--bg-input, #121216);
+  border: 1px solid var(--border-color, #2a2a32);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text-main, #ffffff);
+  outline: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.editSelect:focus, .editDateInput:focus {
+  border-color: var(--accent-color, #007aff);
+}
+
+/* Баджи приоритета */
+.priorityBadge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.high {
+  background-color: rgba(255, 69, 58, 0.15);
+  color: #ff453a;
+}
+
+.medium {
+  background-color: rgba(255, 159, 10, 0.15);
+  color: #ff9f0a;
+}
+
+.low {
+  background-color: rgba(48, 209, 88, 0.15);
+  color: #30d158;
+}
+
+.dateValue {
+  font-size: 0.85rem;
+  color: var(--text-main, #ffffff);
+  font-weight: 500;
+}
+
+/* Служебный футер */
+.sidebarFooter {
+  padding: 16px 20px;
+  background-color: var(--bg-footer, #17171c);
+  border-top: 1px solid var(--border-color, #2a2a32);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted, #8e8e93);
+}
+
+.statusActive {
+  color: #0a84ff;
+  font-weight: 500;
+}
+
+.statusDone {
+  color: #30d158;
+  font-weight: 500;
+}
+
+/* Красивое пустое состояние */
 .emptyState {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #4b5563;
-  text-align: center;
+  color: var(--text-muted, #8e8e93);
   gap: 12px;
   padding: 20px;
+  text-align: center;
 }
 
 .emptyState p {
-  font-size: 13px;
+  font-size: 0.9rem;
   margin: 0;
-  max-width: 200px;
-  line-height: 1.5;
-}
-
-/* АДАПТИВ: Планшеты и мобилки */
-@media (max-width: 1024px) {
-  .sidebarRight {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100% !important;
-    min-width: 100% !important;
-    height: 100vh;
-    z-index: 999;
-    border-left: none;
-    transform: translateX(0);
-    opacity: 1;
-  }
-  
-  /* Скрываем выезжающую панель на мобилках за пределы экрана */
-  .sidebarRight.hidden {
-    transform: translateX(100%);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .emptyState {
-    display: none; /* На мобилках пустой стейт не нужен — панель просто закрыта */
-  }
 }

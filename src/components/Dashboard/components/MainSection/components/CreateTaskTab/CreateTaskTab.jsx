@@ -1,10 +1,10 @@
 import styles from "./CreateTaskTab.module.css";
-import CreateTaskHeader from "./components/CreateTaskHeader/CreateTaskHeader";
-import ExpandedTaskCreator from "./components/ExpandedTaskCreator/ExpandedTaskCreator";
-import { useCreateTask } from "./hooks/useCreateTask";
-import { USER_TAGS } from "./constants/tags";
+import CreateTaskHeader from "./components/CreateTaskHeader";
+import ExpandedTaskCreator from "./components/ExpandedTaskCreator";
+import { useCreateTask } from "./useCreateTask";
 
-export default function CreateTaskTab({ setTodos }) {
+export default function CreateTaskTab() {
+  // Вызываем хук без передачи аргументов, так как он сам внутри заберёт всё из контекста
   const {
     taskForm,
     setTaskForm,
@@ -12,7 +12,7 @@ export default function CreateTaskTab({ setTodos }) {
     setIsExpanded,
     handleCreate,
     resetForm,
-  } = useCreateTask(setTodos);
+  } = useCreateTask();
 
   return (
     <div className={`${styles.newTodoCard} ${isExpanded ? styles.active : ""}`}>
@@ -27,7 +27,6 @@ export default function CreateTaskTab({ setTodos }) {
           taskForm={taskForm}
           setTaskForm={setTaskForm}
           isExpanded={isExpanded}
-          userTags={USER_TAGS}
           resetForm={resetForm}
         />
       </form>

@@ -1,15 +1,18 @@
-import styles from "./ExpandedTaskCreator.module.css";
-import TaskCreatorFooter from "./components/TaskCreatorFooter/TaskCreatorFooter";
-import TaskCreatorDates from "./components/TaskCreatorDates/TaskCreatorDates";
-import TaskCreatorTags from "./components/TaskCreatorTags/TaskCreatorTags";
+import styles from "../CreateTaskTab.module.css";
+import TaskCreatorFooter from "./TaskCreatorFooter";
+import TaskCreatorDates from "./TaskCreatorDates";
+import TaskCreatorTags from "./TaskCreatorTags";
 
 export default function ExpandedTaskCreator({
   taskForm,
   setTaskForm,
   isExpanded,
-  userTags,
   resetForm,
 }) {
+  const handleDescriptionChange = (e) => {
+    setTaskForm((prev) => ({ ...prev, desc: e.target.value }));
+  };
+
   return (
     <div className={`${styles.expandedPanel} ${isExpanded ? styles.show : ""}`}>
       {/* Описание задачи */}
@@ -17,9 +20,7 @@ export default function ExpandedTaskCreator({
         placeholder="Add task description..."
         className={styles.descriptionTextarea}
         value={taskForm.desc}
-        onChange={(e) =>
-          setTaskForm((prev) => ({ ...prev, desc: e.target.value }))
-        }
+        onChange={handleDescriptionChange}
       />
 
       {/* Контейнер параметров */}
@@ -27,12 +28,8 @@ export default function ExpandedTaskCreator({
         {/* Блок дат */}
         <TaskCreatorDates taskForm={taskForm} setTaskForm={setTaskForm} />
 
-        {/* Блок тегов */}
-        <TaskCreatorTags
-          taskForm={taskForm}
-          setTaskForm={setTaskForm}
-          userTags={userTags}
-        />
+        {/* Блок тегов — больше не прокидываем userTags */}
+        <TaskCreatorTags taskForm={taskForm} setTaskForm={setTaskForm} />
       </div>
 
       {/* Футер с кнопками */}

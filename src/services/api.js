@@ -6,10 +6,16 @@ const api = axios.create({
 });
 
 
-
 export const todoService = {
-  getAll: async () => {
-    const response = await api.get('/todos');
+  getAll: async (folder) => {
+    const currentDateTime = new Date().toISOString();
+
+    const response = await api.get("/todos", {
+      params: {
+        folder: folder,
+        dateTime: currentDateTime
+      }
+    });
     return response.data;
   },
   create: async (todoDto) => {
@@ -18,6 +24,16 @@ export const todoService = {
   },
   delete: async (id) => {
     await api.delete(`/todos/${id}`);
+  },
+  update: async (id, todoDto) => {
+    const response = await api.put(`/todos/${id}`, todoDto)
+    return response.data;
+  },
+  complete: async (id) => {
+    await api.put(`/todos/${id}/complete`)
+  },
+  uncomplete: async (id) => {
+    await api.put(`/todos/${id}/uncomplete`)
   }
 };
 
@@ -38,4 +54,23 @@ export const authService = {
         const response = await api.get("/auth/status");
         return response.data;
     }
+}
+
+export const tagsService = {
+  getAll: async () => {
+    const response = await api.get("/tags");
+    return response.data;
+  },
+  get: async (id) => {
+    const response = await api.get(`/tags/${id}`);
+    return response.data;
+  },
+  create: async (tagDto) => {
+    const response = await api.post("/tags", tagDto);
+    return response.data;
+  },
+  delete: async (id) => {
+    const response = await api.delete(`/tags/${id}`);
+    return response.data;
+  }
 }

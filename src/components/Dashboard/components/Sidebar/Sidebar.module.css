@@ -1,42 +1,134 @@
-
-/* ЛЕВАЯ КОЛОНКА: Папки */
 .sidebarLeft {
   width: 260px;
-  min-width: 260px;
-  background-color: #12141c;
-  border-right: 1px solid #1e2230;
-  padding: 24px;
-  box-sizing: border-box;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Расталкивает контент (папки) и профиль по краям */
-  height: 100%; /* Обязательно, чтобы панель была на всю высоту */
+  justify-content: space-between;
+  padding: 24px 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #121214;
+  box-sizing: border-box;
 }
+
 .sidebarTopContent {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 28px;
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
-.sidebarLeft h3 {
-  margin-bottom: 12px;
-  font-size: 18px;
-  font-weight: 600;
+.sidebarTopContent::-webkit-scrollbar {
+  width: 4px;
 }
 
-.sidebarLeftPlaceholder {
-  color: #6b7280;
-  font-size: 14px;
+.sidebarTopContent::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
 
 .logoWrapper {
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
+  padding-left: 10px;
+  margin-bottom: 8px;
 }
 
-@media (max-width: 768px) {
-  .sidebarLeft {
-    display: none;
-  }
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+}
+
+.groupTitle {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #55555c;
+  user-select: none;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #b3b3b3;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.navItem:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+}
+
+.active .iconWrapper {
+  opacity: 1;
+}
+
+.navLabel {
+  line-height: 1;
+}
+
+.navGroup .addButton {
+  background: transparent;
+  border: none;
+  color: #55555c;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.navGroup .addButton:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.navGroup .addButton:active {
+  transform: scale(0.95);
 }

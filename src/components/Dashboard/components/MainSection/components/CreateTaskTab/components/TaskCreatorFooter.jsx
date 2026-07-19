@@ -1,6 +1,6 @@
-import styles from "./TaskCreatorFooter.module.css";
-
+import styles from "../CreateTaskTab.module.css";
 import Button from "@/components/UI/Button/Button";
+
 export default function TaskCreatorFooter({ resetForm, isTitleEmpty }) {
   return (
     <div className={styles.expandedFooter}>
@@ -8,7 +8,7 @@ export default function TaskCreatorFooter({ resetForm, isTitleEmpty }) {
         Отмена
       </Button>
       <Button type="submit" disabled={isTitleEmpty}>
-        Add
+        Создать
       </Button>
     </div>
   );

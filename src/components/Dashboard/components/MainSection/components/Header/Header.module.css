@@ -1,16 +1,11 @@
-
-/* ==========================================
-   СТИЛИ ХЕДЕРА СТРАНИЦЫ
-   ========================================== */
-
+/* --- Стили хедера страницы --- */
 .contentHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 64px; /* Фиксированная аккуратная высота */
-  min-height: 64px;
+  height: 64px;
   margin-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03); /* Едва заметная линия снизу */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .headerTitleZone {
@@ -28,62 +23,11 @@
 
 .taskCounter {
   font-size: 13px;
-  color: #4b5563; /* Приглушенный цвет для счетчика */
+  color: #4b5563;
 }
 
 .headerActions {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-/* Компактный плоский поиск */
-.searchWrapper {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-  padding: 4px 10px;
-  gap: 8px;
-}
-
-.searchIcon {
-  color: #4b5563;
-}
-
-.headerSearch {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-size: 13px;
-  width: 140px;
-  transition: width 0.2s ease;
-}
-
-.headerSearch:focus {
-  width: 200px; /* Эффект расширения при фокусе */
-}
-
-.headerSearch::placeholder {
-  color: #4b5563;
-}
-
-/* Кнопка фильтров */
-.filterBtn {
-  background: none !important;
-  border: none !important;
-  color: #86868b !important;
-  font-size: 13px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  padding: 6px 10px !important;
-  border-radius: 6px !important;
-}
-
-.filterBtn:hover {
-  background-color: rgba(255, 255, 255, 0.04) !important;
-  color: #fff !important;
 }

@@ -1,0 +1,55 @@
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Расстояние между карточками тасок */
+  width: 100%;
+}
+
+/* Красивый контейнер для пустых состояний */
+.emptyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+  background: rgba(255, 255, 255, 0.02); /* Легкая подложка */
+  border: 1px dashed rgba(255, 255, 255, 0.08); /* Пунктирная рамка */
+  border-radius: 12px;
+  width: 100%;
+}
+
+.emptyText {
+  color: #72727e; /* Приглушенный серый */
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+/* Секция выполненных */
+.completedSection {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.completedTitle {
+  font-size: 13px;
+  color: #8b8b93;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  
+  /* Добавляем отступы, чтобы текст не лип к краям */
+  padding-left: 14px; 
+  padding-right: 14px;
+}

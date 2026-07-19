@@ -145,3 +145,116 @@
   background-color: rgba(239, 68, 68, 0.1) !important;
   color: #ef4444 !important;
 }
+/* Контейнер таски, если она выполнена */
+.completedTask {
+  opacity: 0.6; /* Слегка приглушаем цвета всей таски */
+  transition: opacity 0.2s ease;
+}
+
+/* Круглый Чекбокс */
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Чекбокс при наведении */
+.checkbox:hover {
+  border-color: #10b981; /* Зеленый цвет при ховере */
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Активный чекбокс (выполненная задача) */
+.checkboxChecked {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+/* Иконка галочки */
+.checkIcon {
+  color: white;
+  animation: scaleUp 0.15s ease-in-out;
+}
+
+/* Зачеркнутый текст заголовка */
+.title {
+  transition: all 0.2s ease;
+}
+
+.titleCompleted {
+  text-decoration: line-through;
+  color: #8c8c8c;
+}
+/* Основной контейнер удаленной задачи */
+.task.deletedTask {
+  opacity: 0.5;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.04);
+  cursor: pointer; /* Теперь карточку снова можно "выбрать" */
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+/* При наведении карточка не должна подсвечиваться так же ярко, как обычная */
+.task.deletedTask:hover {
+  background: rgba(255, 255, 255, 0.03);
+  opacity: 0.6; /* Лишь слегка приподнимаем прозрачность для отклика */
+}
+
+/* Если внутри задачи есть текст (например, span с классом title) */
+.deletedTask .title {
+  color: #72727e;              /* Делаем текст приглушенно-серым */
+  text-decoration: line-through; /* Опционально: можно слегка перечеркнуть */
+}
+
+/* Если у тебя отображаются теги внутри карточки, гасим их яркость */
+.deletedTask .tag {
+  opacity: 0.6;
+  filter: grayscale(80%);      /* Почти полностью обесцвечиваем цветные теги */
+}
+
+.deletedTask .actionButton {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.deletedTask .actionButton:hover {
+  opacity: 1; /* Кнопка загорается только при прямом наведении на нее */
+}
+
+/* Переносим not-allowed строго на чекбокс внутри удаленной задачи */
+.deletedTask .checkbox {
+  cursor: not-allowed; /* Запрещающий курсор только при наведении на кружок чекбокса */
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: transparent !important;
+  opacity: 0.4;
+}
+/* Кнопка восстановления при наведении */
+.actionIconBtn.restore:hover {
+  background-color: rgba(59, 130, 246, 0.1) !important; /* Легкий синий фон */
+  color: #3b82f6 !important; /* Приятный синий цвет иконки */
+}
+.deletedTask .chevron {
+  opacity: 0.3;
+}
+.deletedTask .priorityDot {
+  opacity: 0.4;
+  box-shadow: none; /* Убираем свечение у высокого приоритета */
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

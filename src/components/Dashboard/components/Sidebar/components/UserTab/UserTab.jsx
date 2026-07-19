@@ -1,10 +1,9 @@
 import styles from "./UserTab.module.css";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { authService } from "@/services/api.js";
-import { AuthContext } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext"; // Используем наш кастомный хук
 
-import { X, LogOut, Settings } from "lucide-react";
+import { LogOut, Settings } from "lucide-react";
 import Button from "@/components/UI/Button/Button";
 
 export default function UserTab() {
@@ -14,7 +13,7 @@ export default function UserTab() {
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80", // Мок-аватарка
   };
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
+  const { logout } = useAuth(); // Изящно достаем метод логаута
 
   const handleLogout = async () => {
     console.log("Выход из аккаунта...");
@@ -23,7 +22,7 @@ export default function UserTab() {
       logout();
       navigate("/login", { replace: true });
     } catch (error) {
-      console.log(error.message);
+      console.error("Ошибка при выходе из аккаунта:", error.message);
     }
   };
 
@@ -33,7 +32,7 @@ export default function UserTab() {
         <img src={user.avatarUrl} alt={user.name} className={styles.avatar} />
         <span className={styles.username}>{user.name}</span>
       </div>
-      <Button variant="text" onClick={handleLogout} title="Settings">
+      <Button variant="text" title="Settings">
         <Settings size={18} />
       </Button>
 

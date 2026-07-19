@@ -1,16 +1,178 @@
-
-/* Зона новой задачи (верхняя секция общего контейнера) */
+/* --- Контейнер формы --- */
 .newTodoCard {
   width: 100%;
   padding: 16px;
-  background-color: rgba(255, 255, 255, 0.01); /* Тончайшее выделение зоны ввода */
-  border-bottom: 1px solid #1e2230; /* Отделяем форму от списка задач */
+  background-color: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid #1e2230;
   box-sizing: border-box;
   transition: background-color 0.2s ease-in-out;
 }
 
-/* Слегка подсвечиваем зону ввода, если форма раскрыта */
 .newTodoCard.active {
   background-color: rgba(255, 255, 255, 0.02);
 }
 
+/* --- Главная строка ввода --- */
+.inputRow {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.mainInput {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 4px;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+/* --- Раскрывающаяся панель --- */
+.expandedPanel {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.expandedPanel.show {
+  max-height: 380px;
+  opacity: 1;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.taskParameters {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06); 
+  margin-top: 8px;
+}
+
+/* --- Поля формы и описания --- */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.inputGroup label, .tagsBlock label {
+  font-size: 11px;
+  color: #8a99ad;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.descriptionTextarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid #1e2230;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #a0a5b5;
+  font-size: 14px;
+  resize: none;
+  min-height: 60px;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 4px;
+}
+
+.descriptionTextarea:focus {
+  border-color: #2f80ed;
+}
+
+/* --- Даты --- */
+.datesRow {
+  display: flex;
+  gap: 16px;
+}
+
+.dateInput {
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid #1e2230;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.dateInput:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.dateInput:focus {
+  border-color: #2f80ed;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.4);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.dateInput::-webkit-calendar-picker-indicator:hover {
+  filter: invert(1) opacity(0.7);
+}
+
+/* --- Теги --- */
+.tagsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tagChip {
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #a0a5b5;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tagChip:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.tagChipActive {
+  background-color: var(--tag-color) !important;
+  border-color: var(--tag-color) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Нижняя панель действий --- */
+.expandedFooter {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}

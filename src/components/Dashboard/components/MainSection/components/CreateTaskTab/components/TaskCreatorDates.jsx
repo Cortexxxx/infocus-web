@@ -1,6 +1,10 @@
-import styles from "./TaskCreatorDates.module.css"; // или используй внешние стили, если они общие
+import styles from "../CreateTaskTab.module.css";
 
 export default function TaskCreatorDates({ taskForm, setTaskForm }) {
+  const handleDateChange = (field, value) => {
+    setTaskForm((prev) => ({ ...prev, [field]: value }));
+  };
+
   return (
     <div className={styles.datesRow}>
       <div className={styles.inputGroup}>
@@ -9,9 +13,7 @@ export default function TaskCreatorDates({ taskForm, setTaskForm }) {
           type="date"
           className={styles.dateInput}
           value={taskForm.date}
-          onChange={(e) =>
-            setTaskForm((prev) => ({ ...prev, date: e.target.value }))
-          }
+          onChange={(e) => handleDateChange("date", e.target.value)}
         />
       </div>
 
@@ -21,9 +23,7 @@ export default function TaskCreatorDates({ taskForm, setTaskForm }) {
           type="date"
           className={styles.dateInput}
           value={taskForm.deadline}
-          onChange={(e) =>
-            setTaskForm((prev) => ({ ...prev, deadline: e.target.value }))
-          }
+          onChange={(e) => handleDateChange("deadline", e.target.value)}
         />
       </div>
     </div>

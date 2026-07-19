@@ -1,29 +1,25 @@
 import styles from "./Header.module.css";
+import { useTodos } from "@/context/TodoContext";
 
-import { Search, SlidersHorizontal } from "lucide-react";
-import Button from "@/components/UI/Button/Button";
+// Словарь для красивого вывода названия активной папки
+const folderNames = {
+  today: "Сегодня",
+  tomorrow: "Завтра",
+  week: "Неделя",
+  all: "Все задачи",
+};
 
-export default function Header({ todosCount }) {
+export default function Header() {
+  const { todos, activeFolder } = useTodos();
+
+  const title = folderNames[activeFolder] || "Задачи";
+  const todosCount = todos.length;
+
   return (
     <header className={styles.contentHeader}>
       <div className={styles.headerTitleZone}>
-        <h1 className={styles.pageTitle}>Сегодня</h1>
+        <h1 className={styles.pageTitle}>{title}</h1>
         <span className={styles.taskCounter}>{todosCount} задач</span>
-      </div>
-
-      <div className={styles.headerActions}>
-        <div className={styles.searchWrapper}>
-          <Search size={14} className={styles.searchIcon} />
-          <input
-            type="text"
-            placeholder="Поиск..."
-            className={styles.headerSearch}
-          />
-        </div>
-        <Button variant="text" className={styles.filterBtn}>
-          <SlidersHorizontal size={14} />
-          <span>Фильтры</span>
-        </Button>
       </div>
     </header>
   );

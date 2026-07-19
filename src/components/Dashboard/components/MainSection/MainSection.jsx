@@ -1,27 +1,24 @@
 import styles from "./MainSection.module.css";
-import { todoService } from "@/services/api.js";
+import { useTodos } from "@/context/TodoContext";
 
 import Header from "./components/Header/Header";
 import TodosList from "./components/TodosList/TodosList";
 import CreateTaskTab from "./components/CreateTaskTab/CreateTaskTab";
 
-export default function MainSection({
-  onSelect,
-  todos,
-  setTodos,
-  selectedTodo,
-}) {
+export default function MainSection() {
+  const { activeFolder } = useTodos();
+
+  const showCreateTab =
+    activeFolder !== "completed" && activeFolder !== "deleted";
+
   return (
     <main className={styles.mainContent}>
-      <Header todosCount={todos.length} />
+      <Header />
+
       <section className={styles.todoContainer}>
-        <CreateTaskTab />
-        <TodosList
-          onSelect={onSelect}
-          todos={todos}
-          selectedTodo={selectedTodo}
-          setTodos={setTodos}
-        />
+        {showCreateTab && <CreateTaskTab />}
+
+        <TodosList />
       </section>
     </main>
   );
