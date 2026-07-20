@@ -11,11 +11,10 @@ export function TagsProvider({ children }) {
   const handleAddTag = async (newTag) => {
     try {
       const response = await tagsService.create(newTag);
-      setTags((prev) => {
-        return [...prev, response];
-      });
+      setTags((prev) => [...prev, response]);
+      return true;
     } catch (error) {
-      console.error("Не удалось создать тег", error);
+      return false;
     }
   };
 
@@ -23,29 +22,28 @@ export function TagsProvider({ children }) {
     try {
       const response = await tagsService.delete(id);
       setTags((prev) => {
-        return prev.filter((t) => t.id != id);
+        return prev.filter((t) => t.id !== id);
       });
-    } catch (error) {
-      console.error("Не удалось удалить тег", error);
-    }
+    } catch (error) {}
   };
   const getTagById = async (id) => {
     try {
       const data = await tagsService.get(id);
       return data;
     } catch (error) {
-      console.error("Не удалось получить тег", error);
+      return null;
     }
   };
   const fetchTags = async () => {
     setIsLoading(true);
     try {
       const data = await tagsService.getAll();
-      setTags(data);
+      setTags(Array.isArray(data) ? data : []);
     } catch (error) {
-      console.error("Не удалось получить теги", error);
+      setTags([]);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
   useEffect(() => {
     if (isAuthenticated) {

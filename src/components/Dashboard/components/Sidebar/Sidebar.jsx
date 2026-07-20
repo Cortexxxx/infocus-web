@@ -5,7 +5,7 @@ import UserTab from "./components/UserTab/UserTab";
 import AddTagPopover from "./components/AddTagPopover/AddTagPopover";
 import Button from "@/components/UI/Button/Button";
 import { useTags } from "@/context/TagsContext";
-import { useTodos } from "@/context/TodoContext";
+import { useTodos } from "@/context/TodosContext";
 
 import {
   Inbox,

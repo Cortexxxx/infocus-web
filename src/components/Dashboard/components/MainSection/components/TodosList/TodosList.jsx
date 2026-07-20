@@ -1,6 +1,6 @@
 import Task from "./components/Task/Task";
 import styles from "./TodosList.module.css";
-import { useTodos } from "@/context/TodoContext";
+import { useTodos } from "@/context/TodosContext";
 
 export default function TodosList() {
   const { todos, setTodos, activeFolder, selectedTodo, setSelectedTodo } =

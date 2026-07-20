@@ -14,11 +14,18 @@ export default defineConfig({
     basicSsl()
   ],
   server: {
-    https: true
+    https: true,
+    proxy: {
+      '/api': {
+        target: 'https://localhost:7236', 
+        changeOrigin: true,
+        secure: false, // Игнорируем самоподписанные SSL-сертификаты бэкенда
+      }
+    }
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Настраиваем @ как ссылку на папку src
+      '@': path.resolve(__dirname, './src'),
     },
   }, 
 })

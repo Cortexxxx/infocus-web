@@ -1,10 +1,43 @@
-import axios from 'axios';
+import axios from "axios";
+import toast from "react-hot-toast";
 
-const api = axios.create({
-  baseURL: 'https://localhost:7236/api',
-  withCredentials: true,
+export const api = axios.create({
+  baseURL: "/api",
 });
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.config?.url?.includes("/auth/status")) {
+      return Promise.reject(error);
+    }
+    const data = error.response?.data;
+
+    if (data?.errors) {
+      Object.values(data.errors)
+        .flat()
+        .forEach((msg) => toast.error(msg));
+      return Promise.reject(error);
+    }
+
+    const serverMessage = data?.detail || data?.message || data?.title;
+
+    if (typeof data === "string" && data.trim().length > 0) {
+      toast.error(data);
+      return Promise.reject(error);
+    }
+
+    if (error.response?.status === 401) {
+      toast.error(serverMessage || "Сессия истекла или неверные учётные данные");
+    } else if (serverMessage) {
+      toast.error(serverMessage);
+    } else {
+      toast.error("Не удалось связаться с сервером");
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export const todoService = {
   getAll: async (folder) => {

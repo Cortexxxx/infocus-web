@@ -1,5 +1,5 @@
 import styles from "./Header.module.css";
-import { useTodos } from "@/context/TodoContext";
+import { useTodos } from "@/context/TodosContext";
 
 // Словарь для красивого вывода названия активной папки
 const folderNames = {

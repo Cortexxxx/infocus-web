@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { todoService } from "@/services/api.js";
-import { useTodos } from "@/context/TodoContext"; // Импортируем наш контекст
-
+import { useTodos } from "@/context/TodosContext";
 const EMPTY_FORM = {
   title: "",
   desc: "",
@@ -13,11 +12,15 @@ const EMPTY_FORM = {
 export function useCreateTask() {
   const [taskForm, setTaskForm] = useState(EMPTY_FORM);
   const [isExpanded, setIsExpanded] = useState(false);
-  const { setTodos } = useTodos(); // Вытаскиваем setTodos из контекста
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { setTodos } = useTodos();
 
   const handleCreate = async (e) => {
-    e.preventDefault();
-    if (!taskForm.title.trim()) return;
+    e?.preventDefault();
+    if (!taskForm.title.trim() || isSubmitting) return;
+
+    setIsSubmitting(true);
 
     try {
       const todoDto = {
@@ -30,11 +33,14 @@ export function useCreateTask() {
 
       const response = await todoService.create(todoDto);
       
-      setTodos((prevTodos) => [...prevTodos, response]);
+      setTodos((prevTodos) => 
+        Array.isArray(prevTodos) ? [...prevTodos, response] : [response]
+      );
 
       resetForm();
-    } catch (error) {
-      console.error("Ошибка при создании задачи:", error);
+    } catch {
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -48,6 +54,7 @@ export function useCreateTask() {
     setTaskForm,
     isExpanded,
     setIsExpanded,
+    isSubmitting,
     handleCreate,
     resetForm,
   };

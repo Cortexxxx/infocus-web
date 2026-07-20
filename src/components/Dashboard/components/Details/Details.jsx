@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTodos } from "@/context/TodoContext";
+import { useTodos } from "@/context/TodosContext";
 import { Info } from "lucide-react";
 import { todoService } from "@/services/api";
 import styles from "./Details.module.css";
@@ -12,6 +12,8 @@ import DetailsFooter from "./DetailsFooter";
 export default function Details() {
   const { setTodos, selectedTodo, setSelectedTodo } = useTodos();
   const [isEditing, setIsEditing] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [editForm, setEditForm] = useState({
     title: "",
     description: "",
@@ -20,7 +22,7 @@ export default function Details() {
     scheduledDate: "",
   });
 
-  // Хелпер для нормализации дат при переключении тасок
+  // Хелпер для нормализации дат при переключении тасок в input type="date"
   const parseDate = (dateStr) => (dateStr ? dateStr.split("T")[0] : "");
 
   const resetFormValues = (todo) => ({
@@ -60,17 +62,41 @@ export default function Details() {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if (!editForm.title.trim() || isSubmitting) return;
+
+    setIsSubmitting(true);
+
     try {
-      const updatedTodo = await todoService.update(selectedTodo.id, editForm);
-      setSelectedTodo(updatedTodo);
+      // 1. Приводим DTO к нормальному формату для .NET API
+      const updateDto = {
+        ...editForm,
+        title: editForm.title.trim(),
+        description: editForm.description.trim(),
+        deadline: editForm.deadline
+          ? new Date(editForm.deadline).toISOString()
+          : null,
+        scheduledDate: editForm.scheduledDate
+          ? new Date(editForm.scheduledDate).toISOString()
+          : null,
+      };
+
+      const updatedTodo = await todoService.update(selectedTodo.id, updateDto);
+
+      // 2. Обновляем стейты (если бэк ничего не вернул в response.data, используем updateDto)
+      const finalTodo = updatedTodo || { ...selectedTodo, ...updateDto };
+
+      setSelectedTodo(finalTodo);
       setTodos((prevTodos) =>
-        prevTodos.map((t) =>
-          t.id === selectedTodo.id ? { ...t, ...updatedTodo } : t,
-        ),
+        Array.isArray(prevTodos)
+          ? prevTodos.map((t) => (t.id === selectedTodo.id ? finalTodo : t))
+          : [finalTodo],
       );
+
       setIsEditing(false);
-    } catch (error) {
-      console.error("Возникла ошибка при сохранении задачи:", error.message);
+    } catch {
+      // Ошибки перехватываются Axios-интерцептором
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -88,7 +114,7 @@ export default function Details() {
       onEditStart={() => setIsEditing(true)}
       onCancel={handleCancel}
       onClose={() => setSelectedTodo(null)}
-      isValid={!!editForm.title.trim()}
+      isValid={!!editForm.title.trim() && !isSubmitting}
     />
   );
 
@@ -100,6 +126,7 @@ export default function Details() {
           onChange={handleInputChange}
           onSubmit={handleSave}
           header={sharedHeader}
+          isSubmitting={isSubmitting}
         >
           {sharedFooter}
         </DetailsEdit>

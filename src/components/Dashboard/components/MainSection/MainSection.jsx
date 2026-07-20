@@ -1,5 +1,5 @@
 import styles from "./MainSection.module.css";
-import { useTodos } from "@/context/TodoContext";
+import { useTodos } from "@/context/TodosContext";
 
 import Header from "./components/Header/Header";
 import TodosList from "./components/TodosList/TodosList";

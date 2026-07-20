@@ -5,8 +5,9 @@ import PublicRoute from "./components/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import Authentication from "./components/Authentication/Authentication";
 import Dashboard from "./components/Dashboard/Dashboard";
+import { Toaster } from "react-hot-toast";
 import { TagsProvider } from "./context/TagsContext";
-import { TodosProvider } from "./context/TodoContext";
+import { TodosProvider } from "./context/TodosContext";
 
 function App() {
   return (
@@ -38,6 +39,12 @@ function App() {
           </TodosProvider>
         </TagsProvider>
       </AuthProvider>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+        }}
+      />
     </>
   );
 }

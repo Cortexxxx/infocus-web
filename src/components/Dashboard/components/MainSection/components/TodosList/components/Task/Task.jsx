@@ -1,6 +1,6 @@
 import styles from "./Task.module.css";
 import { todoService } from "@/services/api.js";
-import { useTodos } from "@/context/TodoContext";
+import { useTodos } from "@/context/TodosContext";
 
 import Button from "@/components/UI/Button/Button";
 import { Trash2, RotateCcw, ChevronRight, Calendar, Check } from "lucide-react";

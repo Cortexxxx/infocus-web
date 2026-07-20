@@ -1,6 +1,7 @@
 import { todoService } from "@/services/api";
 import { createContext, useEffect, useState, useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
+
 export const TodosContext = createContext();
 export const useTodos = () => useContext(TodosContext);
 
@@ -14,14 +15,13 @@ export function TodosProvider({ children }) {
   const fetchTodos = async () => {
     setIsLoading(true);
     try {
-      const currentDateTime = new Date().toISOString();
-      const response = await todoService.getAll(activeFolder, currentDateTime);
-      console.log(response);
-      setTodos(response);
+      const response = await todoService.getAll(activeFolder);
+      setTodos(Array.isArray(response) ? response : []);
     } catch (error) {
-      console.error("Error while fetching todos", error);
+      setTodos([]);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -29,10 +29,11 @@ export function TodosProvider({ children }) {
       fetchTodos();
     } else {
       setTodos([]);
-      setIsLoading(false);
       setSelectedTodo(null);
+      setIsLoading(false);
     }
   }, [isAuthenticated, activeFolder]);
+
   return (
     <TodosContext.Provider
       value={{
