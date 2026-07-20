@@ -22,7 +22,6 @@ export default function Details() {
     scheduledDate: "",
   });
 
-  // Хелпер для нормализации дат при переключении тасок в input type="date"
   const parseDate = (dateStr) => (dateStr ? dateStr.split("T")[0] : "");
 
   const resetFormValues = (todo) => ({
@@ -67,7 +66,6 @@ export default function Details() {
     setIsSubmitting(true);
 
     try {
-      // 1. Приводим DTO к нормальному формату для .NET API
       const updateDto = {
         ...editForm,
         title: editForm.title.trim(),
@@ -82,7 +80,6 @@ export default function Details() {
 
       const updatedTodo = await todoService.update(selectedTodo.id, updateDto);
 
-      // 2. Обновляем стейты (если бэк ничего не вернул в response.data, используем updateDto)
       const finalTodo = updatedTodo || { ...selectedTodo, ...updateDto };
 
       setSelectedTodo(finalTodo);
@@ -94,13 +91,11 @@ export default function Details() {
 
       setIsEditing(false);
     } catch {
-      // Ошибки перехватываются Axios-интерцептором
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Выносим общий футер и общий хедер для сборки структуры
   const sharedFooter = (
     <DetailsFooter
       createdAt={selectedTodo.createdAt}

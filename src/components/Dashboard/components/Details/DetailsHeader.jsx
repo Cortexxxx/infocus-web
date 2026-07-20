@@ -37,7 +37,7 @@ export default function DetailsHeader({
             </Button>
             <Button
               variant="text"
-              type="submit" // Работает, если кнопка внутри тега <form>
+              type="submit"
               title="Сохранить изменения"
               className={`${styles.actionButton} ${styles.saveBtn}`}
               disabled={!isValid}

@@ -1,7 +1,7 @@
 .userProfileBlock {
-  margin-top: auto; /* Жестко толкает блок в самый низ */
+  margin-top: auto;
   padding-top: 16px;
-  border-top: 1px solid #1e2230; /* Тонкая линия-разделитель */
+  border-top: 1px solid #1e2230;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,22 +12,20 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  overflow: hidden; /* Чтобы длинное имя не ломало верстку */
+  overflow: hidden;
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  background-color: #1e2230; /* Фолбек-фон, если авы нет */
   border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff6f;
 }
 
 .username {
   font-size: 14px;
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff6f;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -36,7 +34,7 @@
 .logoutButton {
   background: none;
   border: none;
-  color: #86868b; /* Фирменный серый */
+  color: #86868b;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -47,6 +45,6 @@
 }
 
 .logoutButton:hover {
-  background-color: rgba(239, 68, 68, 0.1); /* Мягкий красный фон при наведении */
-  color: #ef4444; /* Красная иконка */
+  background-color: rgba(239, 68, 68, 0.1); 
+  color: #ef4444;
 }

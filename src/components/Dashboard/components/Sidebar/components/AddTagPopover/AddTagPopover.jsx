@@ -18,12 +18,10 @@ export default function AddTagPopover({ isOpen, onClose, onAdd, triggerRect }) {
   const popoverRef = useRef(null);
   const inputRef = useRef(null);
 
-  // 1. Закрытие по клику вовне (Click Outside)
   useEffect(() => {
     if (!isOpen) return;
 
     const handleClickOutside = (event) => {
-      // Если кликнули мимо поповера — закрываем его
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
         onClose();
       }
@@ -33,7 +31,6 @@ export default function AddTagPopover({ isOpen, onClose, onAdd, triggerRect }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
 
-  // 2. Автофокус при открытии
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
@@ -107,6 +104,6 @@ export default function AddTagPopover({ isOpen, onClose, onAdd, triggerRect }) {
         </div>
       </form>
     </div>,
-    document.body, // <-- Монтируем прямо в корень документа
+    document.body,
   );
 }

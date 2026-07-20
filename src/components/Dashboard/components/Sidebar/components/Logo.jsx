@@ -16,7 +16,6 @@ export default function Logo() {
         letterSpacing="-0.3px"
       >
         In
-        {/* Чистый, глубокий акцентный синий без дешевых градиентов */}
         <tspan fontWeight="400" fill="#2f80ed">
           Focus
         </tspan>

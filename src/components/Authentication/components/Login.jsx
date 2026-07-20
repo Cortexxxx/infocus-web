@@ -4,7 +4,6 @@ import { authService } from "@/services/api.js";
 
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
-import toast from "react-hot-toast";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,13 +19,12 @@ export default function Login() {
 
     try {
       await authService.login(loginDto);
-      login();
+      login(email);
       navigate("/dashboard", { replace: true });
     } catch (error) {}
   };
 
   return (
-    /* noValidate отключает браузерный перехват отправки */
     <form onSubmit={handleSubmit} noValidate>
       <h3>Email</h3>
       <input

@@ -29,7 +29,6 @@ export default function Sidebar() {
     setIsPopoverOpen(true);
   };
 
-  // Системные разделы
   const mainFolders = [
     { id: "inbox", name: "Входящие", icon: <Inbox size={18} /> },
     { id: "today", name: "Сегодня", icon: <CalendarDays size={18} /> },
@@ -48,7 +47,6 @@ export default function Sidebar() {
           <Logo />
         </div>
 
-        {/* Группа 1: Главные */}
         <nav className={styles.navGroup}>
           <span className={styles.groupTitle}>Быстрый доступ</span>
 
@@ -71,7 +69,6 @@ export default function Sidebar() {
           </ul>
         </nav>
 
-        {/* Группа 2: По тегам */}
         <nav className={styles.navGroup}>
           <div className={styles.groupHeader}>
             <span className={styles.groupTitle}>Теги</span>
@@ -106,7 +103,6 @@ export default function Sidebar() {
           </ul>
         </nav>
 
-        {/* Группа 3: Остальные */}
         <nav className={styles.navGroup}>
           <span className={styles.groupTitle}>Архив</span>
           <ul className={styles.navList}>

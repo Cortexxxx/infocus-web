@@ -47,16 +47,15 @@
   gap: 6px;
 }
 
-/* Базовая кнопка-иконка */
 .actionButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  min-width: 32px; /* Защита самой кнопки */
+  min-width: 32px; 
   min-height: 32px;
-  flex-shrink: 0;   /* ГОВОРИМ ФЛЕКСУ: НЕ СЖИМАТЬ КНОПКУ! */
+  flex-shrink: 0; 
   background: transparent;
   border: none;
   cursor: pointer;
@@ -64,22 +63,19 @@
   color: var(--text-secondary) !important;
 }
 
-/* Стили для SVG внутри кнопки */
 .actionButton svg {
   display: block;
   width: 16px;
   height: 16px;
-  flex-shrink: 0; /* ГОВОРИМ ФЛЕКСУ: НЕ СЖИМАТЬ ИКОНКУ ВНУТРИ! */
+  flex-shrink: 0;
   stroke: currentColor;
 }
 
-/* Ховер состояния */
 .actionButton:hover {
   background-color: var(--bg-hover, #2a2a32);
   color: var(--text-main, #ffffff);
 }
 
-/* Специфичные ховеры для кнопок отмены и сохранения */
 .cancelBtn:hover {
   color: #ff453a;
 }
@@ -96,7 +92,6 @@
   color: var(--text-main, #ffffff);
 }
 
-/* Скролл-контент */
 .scrollableContent {
   flex: 1;
   overflow-y: auto;
@@ -106,7 +101,6 @@
   gap: 20px;
 }
 
-/* Стили полей ввода */
 .fieldGroup {
   display: flex;
   flex-direction: column;
@@ -121,7 +115,6 @@
   font-weight: 600;
 }
 
-/* Кастомные инпуты формы */
 .editTitleInput {
   width: 100%;
   background: var(--bg-input, #121216);
@@ -177,7 +170,6 @@
   word-break: break-word;
 }
 
-/* Сетка параметров (дедлайн и приоритет) */
 .parametersGrid {
   display: flex;
   flex-direction: column;
@@ -217,7 +209,6 @@
   border-color: var(--accent-color, #007aff);
 }
 
-/* Баджи приоритета */
 .priorityBadge {
   font-size: 0.8rem;
   font-weight: 600;
@@ -247,7 +238,6 @@
   font-weight: 500;
 }
 
-/* Служебный футер */
 .sidebarFooter {
   padding: 16px 20px;
   background-color: var(--bg-footer, #17171c);
@@ -274,7 +264,6 @@
   font-weight: 500;
 }
 
-/* Красивое пустое состояние */
 .emptyState {
   display: flex;
   flex-direction: column;

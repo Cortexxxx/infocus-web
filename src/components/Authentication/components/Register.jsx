@@ -32,7 +32,6 @@ export default function Register() {
       login();
       navigate("/dashboard", { replace: true });
     } catch {
-      // Ошибки уже перехвачены и выведены через интерцептор
     } finally {
       setIsLoading(false);
     }

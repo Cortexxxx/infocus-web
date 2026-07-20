@@ -54,7 +54,6 @@
   background-color: #dc2626;
 }
 
-/* Состояние активности (если нужно подсветить) */
 .active {
   border-color: #fff;
 }
