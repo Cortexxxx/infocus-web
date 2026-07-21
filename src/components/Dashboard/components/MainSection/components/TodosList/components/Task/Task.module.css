@@ -86,7 +86,12 @@
 }
 
 .priorityLow {
-  background-color: #4b5563; /* Серый */
+  background-color: #10b981; /* Изумрудно-зеленый */
+}
+
+.priorityNone {
+  background-color: #4b5563; /* Серый нейтральный */
+  opacity: 0.5;
 }
 
 /* Компоновка правой части */

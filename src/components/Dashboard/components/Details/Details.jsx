@@ -10,7 +10,7 @@ import DetailsEdit from "./DetailsEdit";
 import DetailsFooter from "./DetailsFooter";
 
 export default function Details() {
-  const { setTodos, selectedTodo, setSelectedTodo } = useTodos();
+  const { fetchTodos, selectedTodo, setSelectedTodo } = useTodos();
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Details() {
   const resetFormValues = (todo) => ({
     title: todo.title || "",
     description: todo.description || "",
-    priority: todo.priority || "medium",
+    priority: todo.priority || "none",
     deadline: parseDate(todo.deadline),
     scheduledDate: parseDate(todo.scheduledDate),
   });
@@ -83,11 +83,7 @@ export default function Details() {
       const finalTodo = updatedTodo || { ...selectedTodo, ...updateDto };
 
       setSelectedTodo(finalTodo);
-      setTodos((prevTodos) =>
-        Array.isArray(prevTodos)
-          ? prevTodos.map((t) => (t.id === selectedTodo.id ? finalTodo : t))
-          : [finalTodo],
-      );
+      fetchTodos();
 
       setIsEditing(false);
     } catch {

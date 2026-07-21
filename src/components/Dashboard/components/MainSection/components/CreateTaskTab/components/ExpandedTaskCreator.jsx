@@ -2,6 +2,7 @@ import styles from "../CreateTaskTab.module.css";
 import TaskCreatorFooter from "./TaskCreatorFooter";
 import TaskCreatorDates from "./TaskCreatorDates";
 import TaskCreatorTags from "./TaskCreatorTags";
+import TaskCreatorPriority from "./TaskCreatorPriority";
 
 export default function ExpandedTaskCreator({
   taskForm,
@@ -15,7 +16,6 @@ export default function ExpandedTaskCreator({
 
   return (
     <div className={`${styles.expandedPanel} ${isExpanded ? styles.show : ""}`}>
-      {/* Описание задачи */}
       <textarea
         placeholder="Add task description..."
         className={styles.descriptionTextarea}
@@ -23,16 +23,16 @@ export default function ExpandedTaskCreator({
         onChange={handleDescriptionChange}
       />
 
-      {/* Контейнер параметров */}
       <div className={styles.taskParameters}>
-        {/* Блок дат */}
         <TaskCreatorDates taskForm={taskForm} setTaskForm={setTaskForm} />
+        <TaskCreatorPriority
+          taskForm={taskForm}
+          setTaskForm={setTaskForm}
+        ></TaskCreatorPriority>
 
-        {/* Блок тегов — больше не прокидываем userTags */}
         <TaskCreatorTags taskForm={taskForm} setTaskForm={setTaskForm} />
       </div>
 
-      {/* Футер с кнопками */}
       <TaskCreatorFooter
         resetForm={resetForm}
         isTitleEmpty={!taskForm.title.trim()}

@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   Trash2,
   Plus,
+  ListTodo,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -30,6 +31,7 @@ export default function Sidebar() {
   };
 
   const mainFolders = [
+    { id: "all", name: "Все", icon: <ListTodo size={18} /> },
     { id: "inbox", name: "Входящие", icon: <Inbox size={18} /> },
     { id: "today", name: "Сегодня", icon: <CalendarDays size={18} /> },
     { id: "tomorrow", name: "Завтра", icon: <CalendarRange size={18} /> },

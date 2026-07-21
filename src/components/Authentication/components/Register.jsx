@@ -29,7 +29,7 @@ export default function Register() {
     try {
       await authService.register(registerDto);
       await authService.login(registerDto);
-      login();
+      login(email);
       navigate("/dashboard", { replace: true });
     } catch {
     } finally {

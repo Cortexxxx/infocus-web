@@ -4,6 +4,7 @@ export default function CreateTaskHeader({
   taskForm,
   setTaskForm,
   setIsExpanded,
+  titleInputRef,
 }) {
   const handleTitleChange = (e) => {
     setTaskForm((prev) => ({ ...prev, title: e.target.value }));
@@ -13,6 +14,7 @@ export default function CreateTaskHeader({
     <div className={styles.inputRow}>
       <input
         type="text"
+        ref={titleInputRef}
         placeholder="Enter task name"
         className={styles.mainInput}
         value={taskForm.title}

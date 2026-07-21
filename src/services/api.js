@@ -40,13 +40,15 @@ api.interceptors.response.use(
 );
 
 export const todoService = {
-  getAll: async (folder) => {
+  getAll: async (folder, sortBy = "priority", isDescending = true) => {
     const currentDateTime = new Date().toISOString();
 
     const response = await api.get("/todos", {
       params: {
         folder: folder,
-        dateTime: currentDateTime
+        dateTime: currentDateTime,
+        sortBy,
+        isDescending
       }
     });
     return response.data;

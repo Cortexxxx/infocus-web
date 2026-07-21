@@ -1,10 +1,12 @@
+import { useClickOutside } from "@/hooks/useClickOutside";
 import styles from "./CreateTaskTab.module.css";
 import CreateTaskHeader from "./components/CreateTaskHeader";
 import ExpandedTaskCreator from "./components/ExpandedTaskCreator";
 import { useCreateTask } from "./useCreateTask";
-
+import { useRef } from "react";
 export default function CreateTaskTab() {
-  // Вызываем хук без передачи аргументов, так как он сам внутри заберёт всё из контекста
+  const titleInputRef = useRef();
+  const formRef = useRef(null);
   const {
     taskForm,
     setTaskForm,
@@ -12,13 +14,19 @@ export default function CreateTaskTab() {
     setIsExpanded,
     handleCreate,
     resetForm,
-  } = useCreateTask();
+  } = useCreateTask(titleInputRef);
 
+  useClickOutside(formRef, () => {
+    if (isExpanded) {
+      setIsExpanded(false);
+    }
+  });
   return (
     <div className={`${styles.newTodoCard} ${isExpanded ? styles.active : ""}`}>
-      <form onSubmit={handleCreate}>
+      <form onSubmit={handleCreate} ref={formRef}>
         <CreateTaskHeader
           taskForm={taskForm}
+          titleInputRef={titleInputRef}
           setTaskForm={setTaskForm}
           setIsExpanded={setIsExpanded}
         />

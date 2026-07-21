@@ -33,11 +33,13 @@ export default function DetailsView({ todo, children }) {
             <span
               className={`${styles.priorityBadge} ${styles[todo.priority?.toLowerCase() || "medium"]}`}
             >
-              {todo.priority === "high"
+              {todo.priority === "High"
                 ? "Высокий"
-                : todo.priority === "medium"
+                : todo.priority === "Medium"
                   ? "Средний"
-                  : "Низкий"}
+                  : todo.priority === "Low"
+                    ? "Низкий"
+                    : "Нет"}
             </span>
           </div>
 

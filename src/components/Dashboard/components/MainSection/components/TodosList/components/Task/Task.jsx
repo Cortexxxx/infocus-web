@@ -72,8 +72,10 @@ export default function Task({ data }) {
         return styles.priorityHigh;
       case "medium":
         return styles.priorityMedium;
-      default:
+      case "low":
         return styles.priorityLow;
+      default:
+        return styles.priorityNone;
     }
   };
 

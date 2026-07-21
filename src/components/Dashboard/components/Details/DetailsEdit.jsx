@@ -44,9 +44,10 @@ export default function DetailsEdit({
               value={formState.priority}
               onChange={(e) => onChange("priority", e.target.value)}
             >
-              <option value="low">Низкий</option>
-              <option value="medium">Средний</option>
-              <option value="high">Высокий</option>
+              <option value="None">Нет</option>
+              <option value="Low">Низкий</option>
+              <option value="Medium">Средний</option>
+              <option value="High">Высокий</option>
             </select>
           </div>
 
