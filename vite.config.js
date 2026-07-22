@@ -4,7 +4,6 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-// Воссоздаем __dirname для ES-модулей
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -19,7 +18,7 @@ export default defineConfig({
       '/api': {
         target: 'https://localhost:7236', 
         changeOrigin: true,
-        secure: false, // Игнорируем самоподписанные SSL-сертификаты бэкенда
+        secure: false,
       }
     }
   },
