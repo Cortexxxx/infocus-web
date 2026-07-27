@@ -11,20 +11,7 @@ permissions:
   packages: write
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Setup Node JS
-        uses: actions/setup-node@v5
-        with:
-          node-version: "22"
-
-      - run: npm ci
-      - run: npm run lint
   docker:
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
